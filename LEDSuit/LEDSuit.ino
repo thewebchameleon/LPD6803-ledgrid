@@ -1,5 +1,5 @@
-#include <LPD6803.h>
-#include <TimerOne.h>
+#include "LPD6803.h"
+#include "TimerOne.h"
 //		LED SUIT V0.5 - Spawn of Adrian Brink
 
 //SETUP
@@ -11,8 +11,8 @@
 //pin config
 
 //pin config - spi
-const int dataPin = 16;       // 'blue' wire
-const int clockPin = 15;      // 'green' wire
+int dataPin = 16;       // 'blue' wire
+int clockPin = 15;      // 'green' wire
 
 //pin config - input buttons
 const int buttonInputPin = 8;
@@ -233,7 +233,8 @@ void Spontanious(int startingHueColour, int startingWheelColour) {
 		else {
 			RectractingInverseLines(38, true);
 		}
-	} else if (wait > 4000 && wait < 8000) {
+	}
+	else if (wait > 4000 && wait < 8000) {
 		RandomWarpedStar(GetRandomWheelColour(), true);
 	}
 	else
@@ -263,7 +264,7 @@ void RainbowColourEverywherreeee() {
 
 #pragma region Visual Methods
 
-bool PleaseSirCanIHaveSomeMore(int wait, int speed, int *hueColour) {
+bool PleaseSirCanIHaveSomeMore(int wait, int speed, int* hueColour) {
 	int i, j;
 	int buttonInput = 0;
 	int suitMode = 0;
@@ -385,7 +386,7 @@ void CrissCrossInitialise(int wait, int cycles) {
 	}
 }
 
-void RainbowWaves(int wait, int wheelColour){
+void RainbowWaves(int wait, int wheelColour) {
 	int colour = wheelColour;
 
 	for (int c = 0; c < chestGridColumns; c++) {
@@ -396,7 +397,7 @@ void RainbowWaves(int wait, int wheelColour){
 	delay(wait);
 
 	for (int i = 0; i < chestGridRows; i++) {
-		if (i != chestGridRows - 1){
+		if (i != chestGridRows - 1) {
 			for (int c = 0; c < chestGridColumns; c++) {
 				strip.setPixelColor(chestGrid[i + 1][c], Wheel(colour));
 			}
@@ -696,7 +697,7 @@ void RandomRainbowPixelBuildUp(int startPosition) {
 	delay(60);
 }
 
-void WhiteFlashBuildUp(){
+void WhiteFlashBuildUp() {
 	int white = Color(30, 30, 30);
 
 
@@ -1096,7 +1097,7 @@ void RandomWarpedStar(int colour, bool fadeOut) {
 		strip.setPixelColor(chestGrid[y + 1][x + 1], Wheel(colour));
 		strip.setPixelColor(chestGrid[y - 1][x - 1], Wheel(colour));
 	}
-	else if (randomStar == 1)  {
+	else if (randomStar == 1) {
 		//vertical line
 		strip.setPixelColor(chestGrid[y + 1][x], Wheel(colour));
 		strip.setPixelColor(chestGrid[y - 1][x], Wheel(colour));
@@ -1110,7 +1111,7 @@ void RandomWarpedStar(int colour, bool fadeOut) {
 		strip.setPixelColor(chestGrid[y + 1][x - 1], Wheel(colour));
 		strip.setPixelColor(chestGrid[y - 1][x + 1], Wheel(colour));
 	}
-	else if (randomStar == 1)  {
+	else if (randomStar == 1) {
 		//horizontal line
 		strip.setPixelColor(chestGrid[y][x - 1], Wheel(colour));
 		strip.setPixelColor(chestGrid[y][x + 1], Wheel(colour));
@@ -1123,7 +1124,7 @@ void RandomWarpedStar(int colour, bool fadeOut) {
 		strip.setPixelColor(chestGrid[constrain(y + 2, 0, rows)][constrain(x - 2, 0, columns)], Wheel(colour));
 		strip.setPixelColor(chestGrid[constrain(y - 2, 0, rows)][constrain(x + 2, 0, columns)], Wheel(colour));
 	}
-	else if (randomStar == 1)  {
+	else if (randomStar == 1) {
 		strip.setPixelColor(chestGrid[constrain(y, 0, rows)][constrain(x - 2, 0, columns)], Wheel(colour));
 		strip.setPixelColor(chestGrid[constrain(y, 0, rows)][constrain(x + 2, 0, columns)], Wheel(colour));
 	}
@@ -1136,7 +1137,7 @@ void RandomWarpedStar(int colour, bool fadeOut) {
 		strip.setPixelColor(chestGrid[constrain(y + 2, 0, rows)][constrain(x + 2, 0, columns)], Wheel(colour));
 		strip.setPixelColor(chestGrid[constrain(y - 2, 0, rows)][constrain(x - 2, 0, columns)], Wheel(colour));
 	}
-	else if (randomStar == 1)  {
+	else if (randomStar == 1) {
 		strip.setPixelColor(chestGrid[constrain(y - 2, 0, rows)][constrain(x, 0, columns)], Wheel(colour));
 		strip.setPixelColor(chestGrid[constrain(y + 2, 0, rows)][constrain(x, 0, columns)], Wheel(colour));
 	}
@@ -1155,7 +1156,7 @@ void RandomWarpedStar(int colour, bool fadeOut) {
 			strip.setPixelColor(chestGrid[constrain(y + 2, 0, rows)][constrain(x + 2, 0, columns)], 0);
 			strip.setPixelColor(chestGrid[constrain(y - 2, 0, rows)][constrain(x - 2, 0, columns)], 0);
 		}
-		else if (randomStar == 1)  {
+		else if (randomStar == 1) {
 			strip.setPixelColor(chestGrid[y][x - 1], 0);
 			strip.setPixelColor(chestGrid[y][x + 1], 0);
 			strip.setPixelColor(chestGrid[y + 1][x], 0);
@@ -1177,7 +1178,7 @@ void RandomWarpedStar(int colour, bool fadeOut) {
 			/*strip.setPixelColor(chestGrid[constrain(y + 2, 0, rows)][constrain(x - 2, 0, columns)], 0);
 			strip.setPixelColor(chestGrid[constrain(y - 2, 0, rows)][constrain(x + 2, 0, columns)], 0);*/
 		}
-		else if (randomStar == 1)  {
+		else if (randomStar == 1) {
 			strip.setPixelColor(chestGrid[y][x - 1], 0);
 			strip.setPixelColor(chestGrid[y][x + 1], 0);
 			strip.setPixelColor(chestGrid[y + 1][x], 0);
@@ -1206,7 +1207,7 @@ void RandomWarpedStar(int colour, bool fadeOut) {
 			/*strip.setPixelColor(chestGrid[constrain(y + 2, 0, rows)][constrain(x - 2, 0, columns)], 0);
 			strip.setPixelColor(chestGrid[constrain(y - 2, 0, rows)][constrain(x + 2, 0, columns)], 0);*/
 		}
-		else if (randomStar == 1)  {
+		else if (randomStar == 1) {
 			strip.setPixelColor(chestGrid[y][x - 1], 0);
 			strip.setPixelColor(chestGrid[y][x + 1], 0);
 			strip.setPixelColor(chestGrid[y + 1][x], 0);
@@ -1227,7 +1228,7 @@ void RandomWarpedStar(int colour, bool fadeOut) {
 			strip.setPixelColor(chestGrid[constrain(y + 2, 0, rows)][constrain(x + 2, 0, columns)], 0);
 			strip.setPixelColor(chestGrid[constrain(y - 2, 0, rows)][constrain(x - 2, 0, columns)], 0);
 		}
-		else if (randomStar == 1)  {
+		else if (randomStar == 1) {
 			strip.setPixelColor(chestGrid[y][x - 1], 0);
 			strip.setPixelColor(chestGrid[y][x + 1], 0);
 			strip.setPixelColor(chestGrid[y + 1][x], 0);
@@ -1342,7 +1343,7 @@ void GlowingDiagonalPosGradientBar(int wait, int speed, int hueColour) {
 
 #pragma region Helper Methods
 
-void PlayVisualSet(int suitMode, int *startingHueColour, int wheelColour) {
+void PlayVisualSet(int suitMode, int* startingHueColour, int wheelColour) {
 	SetChestGridColour(0, 0);
 	switch (suitMode) {
 	case LOW_POWER_MODE:
